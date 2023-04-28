@@ -3,6 +3,7 @@ In this lesson, you will infer sentiment and topics from product reviews and new
 
 ## Setup
 
+```python
 import openai
 import os
 
@@ -19,9 +20,11 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
         temperature=0, # this is the degree of randomness of the model's output
     )
     return response.choices[0].message["content"]
+```
 
 ## Product review text
 
+```python
 lamp_review = """
 Needed a nice lamp for my bedroom, and this one had \
 additional storage and not too high of a price point. \
@@ -33,9 +36,11 @@ support and they very quickly got me the missing piece! \
 Lumina seems to me to be a great company that cares \
 about their customers and products!!
 """
+```
 
 ## Sentiment (positive/negative)
 
+```python
 prompt = f"""
 What is the sentiment of the following product review, 
 which is delimited with triple backticks?
@@ -56,9 +61,11 @@ Review text: '''{lamp_review}'''
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ## Identify types of emotions
 
+```python
 prompt = f"""
 Identify a list of emotions that the writer of the \
 following review is expressing. Include no more than \
@@ -69,9 +76,11 @@ Review text: '''{lamp_review}'''
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ## Identify anger
 
+```python
 prompt = f"""
 Is the writer of the following review expressing anger?\
 The review is delimited with triple backticks. \
@@ -81,9 +90,11 @@ Review text: '''{lamp_review}'''
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ## Extract product and company name from customer reviews
 
+```python
 prompt = f"""
 Identify the following items from the review text: 
 - Item purchased by reviewer
@@ -100,9 +111,11 @@ Review text: '''{lamp_review}'''
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ## Doing multiple tasks at once
 
+```python
 prompt = f"""
 Identify the following items from the review text: 
 - Sentiment (positive or negative)
@@ -122,9 +135,11 @@ Review text: '''{lamp_review}'''
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ## Inferring topics
 
+```python
 story = """
 In a recent survey conducted by the government, 
 public sector employees were asked to rate their level 
@@ -152,9 +167,11 @@ satisfied with their job. The government has pledged to
 address the concerns raised by employees in the survey and 
 work towards improving job satisfaction across all departments.
 """
+```
 
 ## Infer 5 topics
 
+```python
 prompt = f"""
 Determine five topics that are being discussed in the \
 following text, which is delimited by triple backticks.
@@ -174,9 +191,11 @@ topic_list = [
     "nasa", "local government", "engineering", 
     "employee satisfaction", "federal government"
 ]
+```
 
 ## Make a news alert for certain topics
 
+```python
 prompt = f"""
 Determine whether each item in the following list of \
 topics is a topic in the text below, which
@@ -190,9 +209,12 @@ Text sample: '''{story}'''
 """
 response = get_completion(prompt)
 print(response)
+```
 
+```python
 topic_dict = {i.split(': ')[0]: int(i.split(': ')[1]) for i in response.split(sep='\n')}
 if topic_dict['nasa'] == 1:
     print("ALERT: New NASA story!")
+```
 
 ## Try experimenting on your own!
