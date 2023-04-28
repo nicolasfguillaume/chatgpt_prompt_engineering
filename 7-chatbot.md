@@ -4,6 +4,7 @@ In this notebook, you will explore how you can utilize the chat format to have e
 
 ## Setup
 
+```python
 import os
 import openai
 from dotenv import load_dotenv, find_dotenv
@@ -28,7 +29,9 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0)
     )
 #     print(str(response.choices[0].message))
     return response.choices[0].message["content"]
+```
 
+```python
 messages =  [  
 {'role':'system', 'content':'You are an assistant that speaks like Shakespeare.'},    
 {'role':'user', 'content':'tell me a joke'},   
@@ -37,19 +40,25 @@ messages =  [
 
 response = get_completion_from_messages(messages, temperature=1)
 print(response)
+```
 
+```python
 messages =  [  
 {'role':'system', 'content':'You are friendly chatbot.'},    
 {'role':'user', 'content':'Hi, my name is Isa'}  ]
 response = get_completion_from_messages(messages, temperature=1)
 print(response)
+```
 
+```python
 messages =  [  
 {'role':'system', 'content':'You are friendly chatbot.'},    
 {'role':'user', 'content':'Yes,  can you remind me, What is my name?'}  ]
 response = get_completion_from_messages(messages, temperature=1)
 print(response)
+```
 
+```python
 messages =  [  
 {'role':'system', 'content':'You are friendly chatbot.'},
 {'role':'user', 'content':'Hi, my name is Isa'},
@@ -58,10 +67,12 @@ Is there anything I can help you with today?"},
 {'role':'user', 'content':'Yes, you can remind me, What is my name?'}  ]
 response = get_completion_from_messages(messages, temperature=1)
 print(response)
+```
 
 # OrderBot
 We can automate the collection of user prompts and assistant responses to build a  OrderBot. The OrderBot will take orders at a pizza restaurant. 
 
+```python
 def collect_messages(_):
     prompt = inp.value_input
     inp.value = ''
@@ -74,7 +85,6 @@ def collect_messages(_):
         pn.Row('Assistant:', pn.pane.Markdown(response, width=600, style={'background-color': '#F6F6F6'})))
  
     return pn.Column(*panels)
-
 
 import panel as pn  # GUI
 pn.extension()
@@ -111,7 +121,6 @@ sprite 3.00, 2.00, 1.00 \
 bottled water 5.00 \
 """} ]  # accumulate messages
 
-
 inp = pn.widgets.TextInput(value="Hi", placeholder='Enter text here…')
 button_conversation = pn.widgets.Button(name="Chat!")
 
@@ -124,7 +133,9 @@ dashboard = pn.Column(
 )
 
 dashboard
+```
 
+```python
 messages =  context.copy()
 messages.append(
 {'role':'system', 'content':'create a json summary of the previous food order. Itemize the price for each item\
@@ -134,7 +145,4 @@ messages.append(
 
 response = get_completion_from_messages(messages, temperature=0)
 print(response)
-
-## Try experimenting on your own!
-
-You can modify the menu or instructions to create your own orderbot!
+```
