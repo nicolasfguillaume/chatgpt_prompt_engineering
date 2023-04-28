@@ -21,6 +21,7 @@ Throughout this course, we will use OpenAI's `gpt-3.5-turbo` model and the [chat
 
 This helper function will make it easier to use prompts and look at the generated outputs:
 
+```python
 def get_completion(prompt, model="gpt-3.5-turbo"):
     messages = [{"role": "user", "content": prompt}]
     response = openai.ChatCompletion.create(
@@ -29,6 +30,7 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
         temperature=0, # this is the degree of randomness of the model's output
     )
     return response.choices[0].message["content"]
+```
 
 ## Prompting Principles
 - **Principle 1: Write clear and specific instructions**
@@ -39,6 +41,7 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 #### Tactic 1: Use delimiters to clearly indicate distinct parts of the input
 - Delimiters can be anything like: ```, """, < >, `<tag> </tag>`, `:`
 
+```python
 text = f"""
 You should express what you want a model to do by \ 
 providing instructions that are as clear and \ 
@@ -58,10 +61,12 @@ into a single sentence.
 """
 response = get_completion(prompt)
 print(response)
+```
 
 #### Tactic 2: Ask for a structured output
 - JSON, HTML
 
+```python
 prompt = f"""
 Generate a list of three made-up book titles along \ 
 with their authors and genres. 
@@ -70,9 +75,11 @@ book_id, title, author, genre.
 """
 response = get_completion(prompt)
 print(response)
+```
 
 #### Tactic 3: Ask the model to check whether conditions are satisfied
 
+```python
 text_1 = f"""
 Making a cup of tea is easy! First, you need to get some \ 
 water boiling. While that's happening, \ 
@@ -102,7 +109,9 @@ then simply write \"No steps provided.\"
 response = get_completion(prompt)
 print("Completion for Text 1:")
 print(response)
+```
 
+```python
 text_2 = f"""
 The sun is shining brightly today, and the birds are \
 singing. It's a beautiful day to go for a \ 
@@ -132,9 +141,11 @@ then simply write \"No steps provided.\"
 response = get_completion(prompt)
 print("Completion for Text 2:")
 print(response)
+```
 
 #### Tactic 4: "Few-shot" prompting
 
+```python
 prompt = f"""
 Your task is to answer in a consistent style.
 
@@ -149,11 +160,13 @@ the most intricate tapestry begins with a solitary thread.
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ### Principle 2: Give the model time to “think” 
 
 #### Tactic 1: Specify the steps required to complete a task
 
+```python
 text = f"""
 In a charming village, siblings Jack and Jill set out on \ 
 a quest to fetch water from a hilltop \ 
@@ -183,9 +196,11 @@ Text:
 response = get_completion(prompt_1)
 print("Completion for prompt 1:")
 print(response)
+```
 
 #### Ask for output in a specified format
 
+```python
 prompt_2 = f"""
 Your task is to perform the following actions: 
 1 - Summarize the following text delimited by 
@@ -207,9 +222,11 @@ Text: <{text}>
 response = get_completion(prompt_2)
 print("\nCompletion for prompt 2:")
 print(response)
+```
 
 #### Tactic 2: Instruct the model to work out its own solution before rushing to a conclusion
 
+```python
 prompt = f"""
 Determine if the student's solution is correct or not.
 
@@ -234,10 +251,12 @@ Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
 """
 response = get_completion(prompt)
 print(response)
+```
 
 #### Note that the student's solution is actually not correct.
 #### We can fix this by instructing the model to work out its own solution first.
 
+```python
 prompt = f"""
 Your task is to determine if the student's solution \
 is correct or not.
@@ -296,15 +315,18 @@ Actual solution:
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ## Model Limitations: Hallucinations
 - Boie is a real company, the product name is not real.
 
+```python
 prompt = f"""
 Tell me about AeroGlide UltraSlim Smart Toothbrush by Boie
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ## Try experimenting on your own!
 
