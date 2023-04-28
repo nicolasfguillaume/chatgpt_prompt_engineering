@@ -100,9 +100,6 @@ Technical specifications: ```{fact_sheet_chair}```
 """
 response = get_completion(prompt)
 print(response)
-```
-
-```python
 len(response)
 ```
 
