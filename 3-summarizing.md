@@ -215,5 +215,3 @@ for i in range(len(reviews)):
     response = get_completion(prompt)
     print(i, response, "\n")
 ```
-
-## Try experimenting on your own!
