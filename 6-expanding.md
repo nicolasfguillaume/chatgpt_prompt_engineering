@@ -3,6 +3,7 @@ In this lesson, you will generate customer service emails that are tailored to e
 
 ## Setup
 
+```python
 import openai
 import os
 
@@ -19,11 +20,14 @@ def get_completion(prompt, model="gpt-3.5-turbo",temperature=0): # Andrew mentio
         temperature=temperature, # this is the degree of randomness of the model's output
     )
     return response.choices[0].message["content"]
+```
 
 ## Customize the automated reply to a customer email
 
 # given the sentiment from the lesson on "inferring",
 # and the original customer message, customize the email
+
+```python
 sentiment = "negative"
 
 # review for a blender
@@ -77,9 +81,11 @@ Review sentiment: {sentiment}
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ## Remind the model to use details from the customer's email
 
+```python
 prompt = f"""
 You are a customer service AI assistant.
 Your task is to send an email reply to a valued customer.
@@ -97,5 +103,4 @@ Review sentiment: {sentiment}
 """
 response = get_completion(prompt, temperature=0.7)
 print(response)
-
-## Try experimenting on your own!
+```
