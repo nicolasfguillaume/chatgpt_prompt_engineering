@@ -1,4 +1,5 @@
 # Iterative Prompt Develelopment
+
 In this lesson, you'll iteratively analyze and refine your prompts to generate marketing copy from a product fact sheet.
 
 ## Setup
@@ -195,5 +196,3 @@ from IPython.display import display, HTML
 
 display(HTML(response))
 ```
-
-## Try experimenting on your own!
