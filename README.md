@@ -1,2 +1,3 @@
 # chatgpt_prompt_engineering
-deeplearning.ai - ChatGPT Prompt Engineering for Developers
+
+Notebooks from the course [ChatGPT Prompt Engineering for Developers](https://learn.deeplearning.ai/chatgpt-prompt-eng) from deeplearning.ai.
