@@ -3,6 +3,7 @@ In this lesson, you will summarize text with a focus on specific topics.
 
 ## Setup
 
+```python
 import openai
 import os
 
@@ -19,10 +20,11 @@ def get_completion(prompt, model="gpt-3.5-turbo"): # Andrew mentioned that the p
         temperature=0, # this is the degree of randomness of the model's output
     )
     return response.choices[0].message["content"]
-
+```
 
 ## Text to summarize
 
+```python
 prod_review = """
 Got this panda plush toy for my daughter's birthday, \
 who loves it and takes it everywhere. It's soft and \ 
@@ -33,9 +35,11 @@ same price. It arrived a day earlier than expected, \
 so I got to play with it myself before I gave it \ 
 to her.
 """
+```
 
 ## Summarize with a word/sentence/character limit
 
+```python
 prompt = f"""
 Your task is to generate a short summary of a product \
 review from an ecommerce site. 
@@ -48,10 +52,11 @@ Review: ```{prod_review}```
 
 response = get_completion(prompt)
 print(response)
-
+```
 
 ## Summarize with a focus on shipping and delivery
 
+```python
 prompt = f"""
 Your task is to generate a short summary of a product \
 review from an ecommerce site to give feedback to the \
@@ -66,10 +71,11 @@ Review: ```{prod_review}```
 
 response = get_completion(prompt)
 print(response)
-
+```
 
 ## Summarize with a focus on price and value
 
+```python
 prompt = f"""
 Your task is to generate a short summary of a product \
 review from an ecommerce site to give feedback to the \
@@ -85,13 +91,14 @@ Review: ```{prod_review}```
 
 response = get_completion(prompt)
 print(response)
-
+```
 
 #### Comment
 - Summaries include topics that are not related to the topic of focus.
 
 ## Try "extract" instead of "summarize"
 
+```python
 prompt = f"""
 Your task is to extract relevant information from \ 
 a product review from an ecommerce site to give \
@@ -106,13 +113,17 @@ Review: ```{prod_review}```
 
 response = get_completion(prompt)
 print(response)
+```
 
 ## Summarize multiple product reviews
 
-
-review_1 = prod_review 
+```python
+review_1 = prod_review
+```
 
 # review for a standing lamp
+
+```python
 review_2 = """
 Needed a nice lamp for my bedroom, and this one \
 had additional storage and not too high of a price \
@@ -125,8 +136,11 @@ very quickly got me the missing piece! Seems to me \
 to be a great company that cares about their customers \
 and products. 
 """
+```
 
 # review for an electric toothbrush
+
+```python
 review_3 = """
 My dental hygienist recommended an electric toothbrush, \
 which is why I got this. The battery life seems to be \
@@ -145,8 +159,11 @@ get generic ones that're more reasonably priced. This \
 toothbrush makes me feel like I've been to the dentist \
 every day. My teeth feel sparkly clean! 
 """
+```
 
 # review for a blender
+
+```python
 review_4 = """
 So, they still had the 17 piece system on seasonal \
 sale for around $49 in the month of November, about \
@@ -179,10 +196,10 @@ they are kind of counting on brand recognition and \
 consumer loyalty to maintain sales. Got it in about \
 two days.
 """
+```
 
+```python
 reviews = [review_1, review_2, review_3, review_4]
-
-
 
 for i in range(len(reviews)):
     prompt = f"""
@@ -197,6 +214,6 @@ for i in range(len(reviews)):
 
     response = get_completion(prompt)
     print(i, response, "\n")
-
+```
 
 ## Try experimenting on your own!
