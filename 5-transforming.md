@@ -4,6 +4,7 @@ In this notebook, we will explore how to use Large Language Models for text tran
 
 ## Setup
 
+```python
 import openai
 import os
 
@@ -20,11 +21,13 @@ def get_completion(prompt, model="gpt-3.5-turbo", temperature=0):
         temperature=temperature, 
     )
     return response.choices[0].message["content"]
+```
 
 ## Translation
 
 ChatGPT is trained with sources in many languages. This gives the model the ability to do translation. Here are some examples of how to use this capability.
 
+```python
 prompt = f"""
 Translate the following English text to Spanish: \ 
 ```Hi, I would like to order a blender```
@@ -46,7 +49,9 @@ and English pirate: \
 """
 response = get_completion(prompt)
 print(response)
+```
 
+```python
 prompt = f"""
 Translate the following text to Spanish in both the \
 formal and informal forms: 
@@ -54,10 +59,12 @@ formal and informal forms:
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ### Universal Translator
 Imagine you are in charge of IT at a large multinational e-commerce company. Users are messaging you with IT issues in all their native languages. Your staff is from all over the world and speaks only their native languages. You need a universal translator!
 
+```python
 user_messages = [
   "La performance du système est plus lente que d'habitude.",  # System performance is slower than normal         
   "Mi monitor tiene píxeles que no se iluminan.",              # My monitor has pixels that are not lighting
@@ -77,26 +84,26 @@ for issue in user_messages:
     """
     response = get_completion(prompt)
     print(response, "\n")
-
-## Try it yourself!
-Try some translations on your own!
-
-
+```
 
 ## Tone Transformation
+
 Writing can vary based on the intended audience. ChatGPT can produce different tones.
 
-
+```python
 prompt = f"""
 Translate the following from slang to a business letter: 
 'Dude, This is Joe, check out this spec on this standing lamp.'
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ## Format Conversion
+
 ChatGPT can translate between formats. The prompt should describe the input and output formats.
 
+```python
 data_json = { "resturant employees" :[ 
     {"name":"Shyam", "email":"shyamjaiswal@gmail.com"},
     {"name":"Bob", "email":"bob32@gmail.com"},
@@ -109,16 +116,20 @@ table with column headers and title: {data_json}
 """
 response = get_completion(prompt)
 print(response)
+```
 
+```python
 from IPython.display import display, Markdown, Latex, HTML, JSON
 display(HTML(response))
+```
 
-## Spellcheck/Grammar check.
+## Spellcheck/Grammar check
 
 Here are some examples of common grammar and spelling problems and the LLM's response. 
 
 To signal to the LLM that you want it to proofread your text, you instruct the model to 'proofread' or 'proofread and correct'.
 
+```python
 text = [ 
   "The girl with the black and white puppies have a ball.",  # The girl has a ball.
   "Yolanda has her notebook.", # ok
@@ -136,7 +147,9 @@ for t in text:
     ```{t}```"""
     response = get_completion(prompt)
     print(response)
+```
 
+```python
 text = f"""
 Got this for my daughter for her birthday cuz she keeps taking \
 mine from my room.  Yes, adults also like pandas too.  She takes \
@@ -150,12 +163,16 @@ to play with it myself before I gave it to my daughter.
 prompt = f"proofread and correct this review: ```{text}```"
 response = get_completion(prompt)
 print(response)
+```
 
+```python
 from redlines import Redlines
 
 diff = Redlines(text,response)
 display(Markdown(diff.output_markdown))
+```
 
+```python
 prompt = f"""
 proofread and correct this review. Make it more compelling. 
 Ensure it follows APA style guide and targets an advanced reader. 
@@ -164,12 +181,4 @@ Text: ```{text}```
 """
 response = get_completion(prompt)
 display(Markdown(response))
-
-## Try it yourself!
-Try changing the instructions to form your own review.
-
-
-
-Thanks to the following sites:
-
-https://writingprompts.com/bad-grammar-examples/
+```
