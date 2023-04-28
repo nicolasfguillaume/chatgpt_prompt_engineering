@@ -3,6 +3,7 @@ In this lesson, you'll iteratively analyze and refine your prompts to generate m
 
 ## Setup
 
+```python
 import openai
 import os
 
@@ -19,9 +20,11 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
         temperature=0, # this is the degree of randomness of the model's output
     )
     return response.choices[0].message["content"]
+```
 
 ## Generate a marketing product description from a product fact sheet
 
+```python
 fact_sheet_chair = """
 OVERVIEW
 - Part of a beautiful family of mid-century inspired office furniture, 
@@ -76,11 +79,12 @@ Technical specifications: ```{fact_sheet_chair}```
 """
 response = get_completion(prompt)
 print(response)
-
+```
 
 ## Issue 1: The text is too long 
 - Limit the number of words/sentences/characters.
 
+```python
 prompt = f"""
 Your task is to help a marketing team create a 
 description for a retail website of a product based 
@@ -96,13 +100,16 @@ Technical specifications: ```{fact_sheet_chair}```
 """
 response = get_completion(prompt)
 print(response)
+```
 
-
+```python
 len(response)
+```
 
 ## Issue 2. Text focuses on the wrong details
 - Ask it to focus on the aspects that are relevant to the intended audience.
 
+```python
 prompt = f"""
 Your task is to help a marketing team create a 
 description for a retail website of a product based 
@@ -145,10 +152,12 @@ Technical specifications: ```{fact_sheet_chair}```
 """
 response = get_completion(prompt)
 print(response)
+```
 
 ## Issue 3. Description needs a table of dimensions
 - Ask it to extract information and organize it in a table.
 
+```python
 prompt = f"""
 Your task is to help a marketing team create a 
 description for a retail website of a product based 
@@ -180,11 +189,14 @@ Technical specifications: ```{fact_sheet_chair}```
 
 response = get_completion(prompt)
 print(response)
+```
 
 ## Load Python libraries to view HTML
 
+```python
 from IPython.display import display, HTML
 
 display(HTML(response))
+```
 
 ## Try experimenting on your own!
